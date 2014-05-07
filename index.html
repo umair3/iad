@@ -45,7 +45,7 @@
 		  <div id="share_video_form" style='padding:10px; background:#fff;'>
 			<h2>Share your Ad</h2>
 			<p>Fill in the details below to share your Ad.</p>
-			<form action="">
+			<form action="javascript:void(0);">
 				<table>
 					<tr>
 						<td>Title: </td>
@@ -117,7 +117,7 @@
       var handler = null,
           page = 1,
           isLoading = false,
-          apiURL = 'http://localhost/projects/free-music-lyrics/api.php/a/index';
+          apiURL = 'http://localhost/projects/iad/api.php/a/index';
 
       // Prepare layout options.
       var options = {
@@ -227,6 +227,35 @@
 	
 	// this functionality is to merged with onClick function later on.
 	$( "#share_ad" ).colorbox({inline:true, innerWidth:0, innerHeight:0, href:'#share_video_form'});
+	
+	/**
+	* POSTs form to add new Ad.
+	*/
+	function postForm(postURL, postData) {
+		
+		$.ajax({
+		  url: postURL,
+		  dataType: 'jsonp',
+		  data: postData,
+		  success: infoMessage
+		});
+	};
+	
+	/**
+	* Shows success message on successful post
+	*/
+	function infoMessage(data) {
+		alert('Ad added successfully');
+	};
+	
+	
+	$( "#share_video_form" ).submit(function( event ) {
+		
+		postURL = 'http://localhost/projects/iad/api.php/a/index';
+		postData = {a:1,b:2};
+		
+		postForm(postURL, postData);
+	});
 	
   </script>
 
