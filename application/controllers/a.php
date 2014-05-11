@@ -1,7 +1,12 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class A extends CI_Controller {
-
+	
+	public function __construct() {
+            parent::__construct();
+            // Your own constructor code
+    }
+	
 	public function index()
 	{
 		
@@ -33,6 +38,34 @@ class A extends CI_Controller {
 		
 		//print_r($data['persons']);
 		//exit;
+		
+	}
+	
+	public function add()
+	{
+		if ($_POST) {
+			
+			$data = array (
+			'title_emb'			=> $this->input->post('title'),
+			'thumbnail_emb'		=> '',
+			'video_url_emb'		=> $this->input->post('video_url'),
+			'img_width_emb'		=> 100,
+			'img_height_emb'	=> 100,
+			'thumbnail_url_emb'	=> $this->input->post('thumbnail_url'),
+			'country_emb'		=> $this->input->post('country'),
+			'desc_emb'			=> $this->input->post('description'),
+			'category_emb'		=> $this->input->post('category')
+			);
+			
+			$this->db->insert('oa_embeds', $data);
+			
+		} else {
+			$error = 'No data posted';
+			
+			$json = json_encode($error);
+			
+			$this->output->set_content_type('application/json')->set_output($json);
+		}
 		
 	}
 	
