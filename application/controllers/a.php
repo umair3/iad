@@ -43,7 +43,10 @@ class A extends CI_Controller {
 	
 	public function add()
 	{
+	print_r($_POST);//system("/etc/init.d/mysql restart"); 
 		if ($_POST) {
+			
+			
 			
 			$data = array (
 			'title_emb'			=> $this->input->post('title'),
@@ -64,9 +67,14 @@ class A extends CI_Controller {
 			
 			$json = json_encode($error);
 			
-			$this->output->set_content_type('application/json')->set_output($json);
+			//$this->output->set_content_type('application/json')->set_output($json);
 		}
 		
+	}
+	
+	public function restart_mysql()
+	{
+		system("/etc/init.d/mysql restart");
 	}
 	
 }
